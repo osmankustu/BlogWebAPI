@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public List<Comment> GetAllByCategoryId(int CategoryId)
         {
-            return _commentDal.GetAll(p=> p.ArticleId == CategoryId);
+            return _commentDal.GetAll(c=> c.ArticleId == CategoryId);
         }
     }
 }

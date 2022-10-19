@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface ICategoryService 
+    public interface IContactService
     {
-       public List<Category> GetAll();
+        public List<Contact> GetAll();
+        public Contact GetByContactİd(int contactId);
 
-       public List<Category> GetById(int CategoryId);
     }
 }

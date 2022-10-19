@@ -15,29 +15,67 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            CategoryTests();
+            ArticleTests();
+            CommentTests();
+            ContactTests();
+            YoneticiTests();
+        }
 
-            foreach (var category in categoryManager.GetAllByCategoryId(2))
+        private static void YoneticiTests()
+        {
+            //Yonetici Test
+            YoneticiManager yoneticiManager = new YoneticiManager(new EfYoneticiDal());
+            foreach (var yonetici in yoneticiManager.GetAll())
             {
-                Console.WriteLine(category.CategoryName);
-                
-
+                Console.WriteLine(yonetici.YoneticiAdi);
             }
-            
+        }
+
+        private static void ContactTests()
+        {
+            //Contact Test
+            ContactManager contactManager = new ContactManager(new EfContactDal());
+
+            foreach (var contact in contactManager.GetAll())
+            {
+                Console.WriteLine(contact.ContactName);
+            }
+        }
+
+        private static void CommentTests()
+        {
+            //Comment Test
+            CommentManager commentManager = new CommentManager(new EfCommentDal());
+
+            foreach (var comment in commentManager.GetAll())
+            {
+                Console.WriteLine(comment.CommentContent);
+            }
+        }
+
+        private static void ArticleTests()
+        {
+            //Article Test
             ArticleManager articleManager = new ArticleManager(new EfArticleDal());
 
             foreach (var article in articleManager.GetAllByCategoryId(1))
             {
                 Console.WriteLine(article.ArticleTitle);
             }
-            
-            CommentManager commentManager = new CommentManager(new EfCommentDal());
+        }
 
-            foreach (var comment in commentManager.GetAll()) 
+        private static void CategoryTests()
+        {
+            //Cattegory Test
+            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+
+            foreach (var category in categoryManager.GetById(2))
             {
-                Console.WriteLine(comment.CommentContent);
+                Console.WriteLine(category.CategoryName);
+
+
             }
-            
         }
     }
 }

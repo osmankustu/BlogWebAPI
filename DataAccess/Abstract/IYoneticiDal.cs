@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IAdministratorDal : IEntityRepository<Yonetici>
+    public interface IYoneticiDal : IEntityRepository<Yonetici>
     {
 
     }
