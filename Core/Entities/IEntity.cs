@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Entites.Abstract
+using System.Text;
+
+
+namespace Core.Entities
 {
     //I Entity implement eden class bir veritabanı tablosudur
     public interface IEntity

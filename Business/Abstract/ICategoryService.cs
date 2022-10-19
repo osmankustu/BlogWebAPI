@@ -11,6 +11,6 @@ namespace Business.Abstract
     {
        public List<Category> GetAll();
 
-       public List<Category> GetAllByCategory(int CategoryId);
+       public List<Category> GetAllByCategoryId(int CategoryId);
     }
 }

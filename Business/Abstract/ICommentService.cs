@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IArticleService
+    public interface ICommentService
     {
-        List<Article> GetAll();
+        public List<Comment> GetAll();
 
-        List<Article> GetAllByCategoryId(int CategoryId);
+        public List<Comment> GetAllByCategoryId(int CategoryId);
     }
 }

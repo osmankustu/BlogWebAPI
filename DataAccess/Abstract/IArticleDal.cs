@@ -1,4 +1,5 @@
-﻿using Entites.Concrete;
+﻿using Core.DataAccess;
+using Entites.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,4 +12,5 @@ namespace DataAccess.Abstract
     {
         
     }
+    //Code Refactoring
 }

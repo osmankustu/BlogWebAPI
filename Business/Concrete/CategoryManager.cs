@@ -22,9 +22,9 @@ namespace Business.Concrete
            return _categoryDal.GetAll();
         }
 
-        public List<Category> GetAllByCategory(int CategoryId)
+        public List<Category> GetAllByCategoryId(int CategoryId)
         {
-            return _categoryDal.GetAll();
+            return _categoryDal.GetAll(p=> p.CategoryId == CategoryId);
         }
     }
 }

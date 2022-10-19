@@ -25,9 +25,9 @@ namespace Business.Concrete
             return _articleDal.GetAll();
         }
 
-        public List<Article> GetAllByCategory(int CategoryId)
+        public List<Article> GetAllByCategoryId(int CategoryId)
         {
-            return _articleDal.GetAll();
+            return _articleDal.GetAll(p=> p.CategoryId == CategoryId);
         }
     }
 }
