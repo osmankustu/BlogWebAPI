@@ -10,16 +10,17 @@ using System.Threading.Tasks;
 namespace ConsoleUI
     //SOLID
     //Open Closed Principle
+    //IoC
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            CategoryTests();
+           // CategoryTests();
             ArticleTests();
-            CommentTests();
-            ContactTests();
-            YoneticiTests();
+            //CommentTests();
+            //ContactTests();
+            //YoneticiTests();
         }
 
         private static void YoneticiTests()
@@ -59,9 +60,9 @@ namespace ConsoleUI
             //Article Test
             ArticleManager articleManager = new ArticleManager(new EfArticleDal());
 
-            foreach (var article in articleManager.GetAllByCategoryId(1))
+            foreach (var article in articleManager.GetArticleDetails())
             {
-                Console.WriteLine(article.ArticleTitle);
+                Console.WriteLine(article.ArticleTitle +"/" + article.CategoryName);
             }
         }
 

@@ -1,4 +1,7 @@
-﻿using Entites.Concrete;
+﻿using Core.Utilities.Results;
+using Core.Utilities.Results.Abstract;
+using Entites.Concrete;
+using Entites.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +12,13 @@ namespace Business.Abstract
 {
     public interface IArticleService
     {
-        List<Article> GetAll();
+        IDataResult<List<Article>> GetAll();
 
-        List<Article> GetAllByCategoryId(int CategoryId);
+        IDataResult<List<Article>> GetAllByCategoryId(int CategoryId);
+
+        IDataResult<List<ArticleDetailDTO>> GetArticleDetails();
+        IDataResult<Article> GetById(int articleId);
+
+        IResult add(Article article);
     }
 }

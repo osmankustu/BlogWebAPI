@@ -1,7 +1,10 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entites.Concrete;
+using Entites.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +22,34 @@ namespace Business.Concrete
             _articleDal = articleDal;
         }
 
-        public List<Article> GetAll()
+        public IResult add(Article article)
         {
-            //iş kodları
-            return _articleDal.GetAll();
+            //Bussines Codes
+            _articleDal.Add(article);
+            return new Result(true,"Ürün Eklendi");
         }
 
-        public List<Article> GetAllByCategoryId(int CategoryId)
+        public IDataResult<List<Article>> GetAll()
+        {
+            //iş kodları
+            return new IDataResult(_articleDal.GetAll());
+        }
+
+        public IDataResult<List<Article>> GetAllByCategoryId(int CategoryId)
         {
             return _articleDal.GetAll(p=> p.CategoryId == CategoryId);
         }
+
+        public IDataResult<List<ArticleDetailDTO>> GetArticleDetails()
+        {
+            return _articleDal.GetArticleDetails();
+        }
+
+        public IDataResult<Article> GetById(int articleId)
+        {
+            return _articleDal.Get(a => a.ArticleId == articleId);
+        }
+
+        
     }
 }

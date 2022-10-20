@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entites.Concrete;
+using Entites.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Article> GetAllByCategory(int CategryId)
         {
             return _articles.Where(a => a.CategoryId == CategryId).ToList();           
+        }
+
+        public List<ArticleDetailDTO> GetArticleDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Article article)
