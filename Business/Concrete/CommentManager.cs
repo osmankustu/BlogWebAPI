@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entites.Concrete;
 using System;
@@ -17,14 +19,14 @@ namespace Business.Concrete
             _commentDal = commentDal;
         }
 
-        public List<Comment> GetAll()
+        public IDataResult<List<Comment>> GetAll()
         {
-            return _commentDal.GetAll();
+            return new SuccessDataResult<List<Comment>>(_commentDal.GetAll());
         }
 
-        public List<Comment> GetAllByCategoryId(int CategoryId)
+        public IDataResult<Comment> GetAllByCategoryId(int CategoryId)
         {
-            return _commentDal.GetAll(c=> c.ArticleId == CategoryId);
+            return new SuccessDataResult<Comment>(_commentDal.Get(c=> c.ArticleId == CategoryId));
         }
     }
 }

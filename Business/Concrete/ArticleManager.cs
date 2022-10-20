@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace Business.Concrete
 {
@@ -32,22 +34,26 @@ namespace Business.Concrete
         public IDataResult<List<Article>> GetAll()
         {
             //iş kodları
-            return new IDataResult(_articleDal.GetAll());
+            if(DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
+            }
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(),Messages.ArticleListted);
         }
 
         public IDataResult<List<Article>> GetAllByCategoryId(int CategoryId)
         {
-            return _articleDal.GetAll(p=> p.CategoryId == CategoryId);
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(p=> p.CategoryId == CategoryId));
         }
 
         public IDataResult<List<ArticleDetailDTO>> GetArticleDetails()
         {
-            return _articleDal.GetArticleDetails();
+            return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails());
         }
 
         public IDataResult<Article> GetById(int articleId)
         {
-            return _articleDal.Get(a => a.ArticleId == articleId);
+            return new SuccessDataResult<Article>(_articleDal.Get(a => a.ArticleId == articleId));
         }
 
         

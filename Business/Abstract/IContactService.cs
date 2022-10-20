@@ -1,4 +1,5 @@
-﻿using Entites.Concrete;
+﻿using Core.Utilities.Results.Abstract;
+using Entites.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Business.Abstract
 {
     public interface IContactService
     {
-        public List<Contact> GetAll();
-        public Contact GetByContactİd(int contactId);
+        public IDataResult<List<Contact>> GetAll();
+        public IDataResult<Contact> GetByContactİd(int contactId);
 
     }
 }

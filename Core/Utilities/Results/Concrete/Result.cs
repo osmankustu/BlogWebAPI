@@ -10,13 +10,13 @@ namespace Core.Utilities.Results.Concrete
     public class Result : IResult
     {
         //overload ovverride
-       public Result(bool succes, string message):this(succes)
+       public Result(bool success, string message):this(success)
         {
            Message = message;
         }
-        public Result(bool succes)
+        public Result(bool success)
         {
-           Success = succes;
+           Success = success;
         }
 
         public bool Success { get; }

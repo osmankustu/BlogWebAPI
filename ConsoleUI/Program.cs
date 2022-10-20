@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using System;
@@ -27,7 +28,8 @@ namespace ConsoleUI
         {
             //Yonetici Test
             YoneticiManager yoneticiManager = new YoneticiManager(new EfYoneticiDal());
-            foreach (var yonetici in yoneticiManager.GetAll())
+            var result = yoneticiManager.GetAll();
+            foreach (var yonetici in result.Data)
             {
                 Console.WriteLine(yonetici.YoneticiAdi);
             }
@@ -38,7 +40,8 @@ namespace ConsoleUI
             //Contact Test
             ContactManager contactManager = new ContactManager(new EfContactDal());
 
-            foreach (var contact in contactManager.GetAll())
+            var result = contactManager.GetAll(); 
+            foreach (var contact in result.Data)
             {
                 Console.WriteLine(contact.ContactName);
             }
@@ -48,8 +51,9 @@ namespace ConsoleUI
         {
             //Comment Test
             CommentManager commentManager = new CommentManager(new EfCommentDal());
+            var result = commentManager.GetAll();
 
-            foreach (var comment in commentManager.GetAll())
+            foreach (var comment in result.Data)
             {
                 Console.WriteLine(comment.CommentContent);
             }
@@ -60,9 +64,18 @@ namespace ConsoleUI
             //Article Test
             ArticleManager articleManager = new ArticleManager(new EfArticleDal());
 
-            foreach (var article in articleManager.GetArticleDetails())
+            var result = articleManager.GetArticleDetails();
+
+            if(result.Success==true)
+            foreach (var article in result.Data) 
             {
                 Console.WriteLine(article.ArticleTitle +"/" + article.CategoryName);
+                    Console.WriteLine(result.Message);
+                
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
 
@@ -70,8 +83,9 @@ namespace ConsoleUI
         {
             //Cattegory Test
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            var result =categoryManager.GetAll();
 
-            foreach (var category in categoryManager.GetById(2))
+            foreach (var category in result.Data)
             {
                 Console.WriteLine(category.CategoryName);
 

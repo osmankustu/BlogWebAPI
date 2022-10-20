@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entites.Concrete;
 using System;
@@ -18,14 +20,14 @@ namespace Business.Concrete
             _yoneticiDal = yoneticiDal;
         }
 
-        public Yonetici Get(int yoneticiId)
+        public IDataResult<Yonetici>Get(int yoneticiId)
         {
-            return _yoneticiDal.Get(y => y.YoneticiId == yoneticiId);
+            return new SuccessDataResult<Yonetici>(_yoneticiDal.Get(y => y.YoneticiId == yoneticiId)) ;
         }
 
-        public List<Yonetici> GetAll()
+        public IDataResult<List<Yonetici>> GetAll()
         {
-            return _yoneticiDal.GetAll();
+            return  new SuccessDataResult<List<Yonetici>>(_yoneticiDal.GetAll());
         }
     }
 }

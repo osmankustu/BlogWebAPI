@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entites.Concrete;
 using System;
@@ -18,14 +20,14 @@ namespace Business.Concrete
             _efContactDal = efContactDal;
         }
 
-        public List<Contact> GetAll()
+        public IDataResult<List<Contact>> GetAll()
         {
-            return _efContactDal.GetAll();
+            return new SuccessDataResult<List<Contact>>(_efContactDal.GetAll());
         }
 
-        public Contact GetByContactİd(int contactId)
+        public IDataResult<Contact> GetByContactİd(int contactId)
         {
-            return _efContactDal.Get(c=> c.ContactId == contactId); 
+            return new SuccessDataResult<Contact>(_efContactDal.Get(c => c.ContactId == contactId)); 
         }
     }
 }
