@@ -11,5 +11,6 @@ namespace Business.Constants
         public static string ArticleAdd = "Makale Eklendi";
         public static string ArticleListted = "Makale Listelendi";
         public static string MaintanceTime = "Sistem Bakımda";
+        public static string ArticleDetails = "Makale Detayları Listelendi";
     }
 }

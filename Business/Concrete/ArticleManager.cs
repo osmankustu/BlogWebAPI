@@ -8,6 +8,7 @@ using Entites.Concrete;
 using Entites.DTOs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,11 @@ namespace Business.Concrete
 
         public IDataResult<List<ArticleDetailDTO>> GetArticleDetails()
         {
-            return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails());
+            //if(DateTime.Now.Hour == 19)
+            //{
+            //    return new ErrorDataResult<List<ArticleDetailDTO>>( Messages.MaintanceTime);
+            //}
+            return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails(),Messages.ArticleDetails);
         }
 
         public IDataResult<Article> GetById(int articleId)

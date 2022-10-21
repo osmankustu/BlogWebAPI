@@ -17,8 +17,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-           // CategoryTests();
-            ArticleTests();
+            //CategoryTests();
+            //ArticleTests();
             //CommentTests();
             //ContactTests();
             //YoneticiTests();

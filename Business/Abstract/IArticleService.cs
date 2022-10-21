@@ -20,5 +20,7 @@ namespace Business.Abstract
         IDataResult<Article> GetById(int articleId);
 
         IResult add(Article article);
+
+        //RESTFUL --> HTTP -->
     }
 }

@@ -28,8 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ArticleTitle = a.ArticleTitle ,
                                  ArticleSummary = a.ArticleSummary ,
                                  ArticleContent= a.ArticleContent,
-                                 CategoryName =
-                                 c.CategoryName
+                                 CategoryName = c.CategoryName
                              };
                 return result.ToList();
             }
