@@ -35,10 +35,10 @@ namespace Business.Concrete
         public IDataResult<List<Article>> GetAll()
         {
             //iş kodları
-            if(DateTime.Now.Hour == 22)
-            {
-                return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
-            }
+            //if(DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
+            //}
             return new SuccessDataResult<List<Article>>(_articleDal.GetAll(),Messages.ArticleListted);
         }
 
@@ -61,6 +61,10 @@ namespace Business.Concrete
             return new SuccessDataResult<Article>(_articleDal.Get(a => a.ArticleId == articleId));
         }
 
+        public IDataResult<List<Article>> GetMostPopular()
+        {
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(a=> a.ArticleId == 2));
+        }
         
     }
 }

@@ -21,6 +21,8 @@ namespace Business.Abstract
 
         IResult add(Article article);
 
+        IDataResult <List<Article>> GetMostPopular();
+
         //RESTFUL --> HTTP -->
     }
 }

@@ -17,6 +17,7 @@ namespace Entites.Concrete
        public string ArticleImage { get; set; }
        public DateTime ArticleDate { get; set; }
        public int CategoryId { get; set; }
+        public int ArticleCount { get; set; }
 
     }
 }
