@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,19 +9,22 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        ICategoryDal _categoryDal;
+        ICategoryService _categoryService;
 
-        public CategoryController(ICategoryDal categoryDal)
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryDal = categoryDal;
+            _categoryService = categoryService;
         }
 
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _categoryDal.GetAll();
-            
-            return Ok(result);
+            var result = _categoryService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

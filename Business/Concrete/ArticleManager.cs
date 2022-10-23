@@ -1,11 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entites.Concrete;
 using Entites.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,8 +30,15 @@ namespace Business.Concrete
         public IResult add(Article article)
         {
             //Bussines Codes
+            var context = new ValidationContext<Article>(article);
+            ArticleValidator articleValidator = new ArticleValidator();
+            var result = articleValidator.Validate(context);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
             _articleDal.Add(article);
-            return new Result(true,"Ürün Eklendi");
+            return new Result(true, "Ürün Eklendi");
         }
 
         public IDataResult<List<Article>> GetAll()
@@ -39,12 +48,12 @@ namespace Business.Concrete
             //{
             //    return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
             //}
-            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(),Messages.ArticleListted);
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(), Messages.ArticleListted);
         }
 
         public IDataResult<List<Article>> GetAllByCategoryId(int CategoryId)
         {
-            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(p=> p.CategoryId == CategoryId));
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(p => p.CategoryId == CategoryId));
         }
 
         public IDataResult<List<ArticleDetailDTO>> GetArticleDetails()
@@ -53,7 +62,7 @@ namespace Business.Concrete
             //{
             //    return new ErrorDataResult<List<ArticleDetailDTO>>( Messages.MaintanceTime);
             //}
-            return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails(),Messages.ArticleDetails);
+            return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails(), Messages.ArticleDetails);
         }
 
         public IDataResult<Article> GetById(int articleId)
@@ -63,8 +72,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Article>> GetMostPopular()
         {
-            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(a=> a.ArticleId == 2));
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll(a => a.ArticleId == 2));
         }
-        
+
     }
 }
