@@ -27,12 +27,7 @@ namespace ConsoleUI
         private static void YoneticiTests()
         {
             //Yonetici Test
-            YoneticiManager yoneticiManager = new YoneticiManager(new EfYoneticiDal());
-            var result = yoneticiManager.GetAll();
-            foreach (var yonetici in result.Data)
-            {
-                Console.WriteLine(yonetici.YoneticiAdi);
-            }
+            
         }
 
         private static void ContactTests()

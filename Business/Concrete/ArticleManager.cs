@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinesAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -34,35 +35,34 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-
-
+        //Authorizations
+        [SecuredOperation("article.add,admin")]
+        //Validations
         [ValidationAspect(typeof(ArticleValidator))]
         public IResult add(Article article)
-        {//business Code
-         //Bir kategoride en fazla 10 makale olabilir
-
-            IResult result =BusinessRules.Run(CheckIfArticleNameExists(article.ArticleTitle),
-                CheckIfProductCountOfCategoryCorrect(article.CategoryId), CheckIfCategoryLimitExceded());
-
+        {
+            //business Code
+            IResult result =BusinessRules.Run(CheckIfArticleNameExists(article.ArticleTitle));
             if (result != null)
             {
                 return result;
             }
+
             _articleDal.Add(article);
             return new SuccesResult(Messages.ArticleAdd);
-
         }
 
 
-
+        
         public IDataResult<List<Article>> GetAll()
         {
-            if (MaintanceTime().Success) 
-                {
-               
-                return new SuccessDataResult<List<Article>>(_articleDal.GetAll(), Messages.ArticleListted);
+            IResult result = BusinessRules.Run(MaintanceTime());
+            if (result != null)
+            {
+                return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
             }
-            return new ErrorDataResult<List<Article>>(Messages.MaintanceTime);
+            return new SuccessDataResult<List<Article>>(_articleDal.GetAll());
+            
         }
 
         public IDataResult<List<Article>> GetAllByCategoryId(int CategoryId)
@@ -72,10 +72,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ArticleDetailDTO>> GetArticleDetails()
         {
-            //if(DateTime.Now.Hour == 19)
-            //{
-            //    return new ErrorDataResult<List<ArticleDetailDTO>>( Messages.MaintanceTime);
-            //}
+            
             return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails(), Messages.ArticleDetails);
         }
 
@@ -115,7 +112,7 @@ namespace Business.Concrete
 
         private IResult MaintanceTime()
         {
-            if (DateTime.Now.Hour == 15)
+            if (DateTime.Now.Hour == 20)
             {
                 return new ErrorResult(Messages.MaintanceTime);
             }
@@ -129,7 +126,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.ArticleNameExists);
             }
-            return new  SuccesResult();
+            return new  SuccesResult(Messages.ArticleAdd);
         }
 
         private IResult CheckIfCategoryLimitExceded()

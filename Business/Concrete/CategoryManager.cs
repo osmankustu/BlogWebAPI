@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinesAspects.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
@@ -22,6 +23,8 @@ namespace Business.Concrete
         {
             _categoryDal = categoryDal;
         }
+
+        [SecuredOperation("category.add,admin")]
         [ValidationAspect(typeof(CategoryValidator))]
         public IResult add(Category category)
         {

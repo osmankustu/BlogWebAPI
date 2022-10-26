@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entites.DTOs
 {
-    public class YoneticiDto : IDto
+    public class UserForLoginDto : IDto
     {
-        public string YoneticiKullaniciAdi { get; set; }
-        public string YoneticiSifre { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
+
 }

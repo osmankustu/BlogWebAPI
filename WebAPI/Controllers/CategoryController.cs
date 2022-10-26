@@ -40,8 +40,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
         }
-        [HttpPost]
-        public IActionResult Post(Category category)
+        [HttpPost("add")]
+        public IActionResult Add(Category category)
         {
             var result = _categoryService.add(category);
             if (result.Success)

@@ -1,6 +1,5 @@
 ﻿using Core.DataAccess;
-using Entites.Concrete;
-using Entites.DTOs;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IYoneticiDal : IEntityRepository<Yonetici>
+    public interface IUserDal : IEntityRepository<User>
     {
-        List<YoneticiDto> GetArticleDetails();
+        List<OperationClaim> GetClaims(User user);
     }
 }
