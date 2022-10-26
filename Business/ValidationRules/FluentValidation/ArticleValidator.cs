@@ -15,7 +15,8 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(a => a.ArticleTitle).MinimumLength(10).NotEmpty();
             RuleFor(a => a.ArticleContent).MinimumLength(10).NotEmpty();
             RuleFor(a => a.ArticleDate).NotEmpty();
-            RuleFor(a => a.ArticleSummary).MaximumLength(10).NotEmpty();
+            RuleFor(a => a.ArticleSummary).MinimumLength(10).NotEmpty();
+            
 
         }
     }

@@ -13,5 +13,7 @@ namespace Business.Abstract
        public IDataResult<List<Category>> GetAll();
 
        public IDataResult<Category> GetById(int CategoryId);
+        public IResult add(Category category);
+        
     }
 }

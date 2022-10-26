@@ -12,5 +12,8 @@ namespace Business.Constants
         public static string ArticleListted = "Makale Listelendi";
         public static string MaintanceTime = "Sistem Bakımda";
         public static string ArticleDetails = "Makale Detayları Listelendi";
+        internal static string ArticleCountOfCategoryError = "Bir Kategoride Sadece 10 Adet Makale Olabilir";
+        internal static string ArticleNameExists = "Bu Makale İsmi Zaten Mevcut";
+        internal static string CategoryLimitExceded = "Kategori Limiti Aşıldı";
     }
 }

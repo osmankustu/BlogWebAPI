@@ -62,7 +62,7 @@ namespace ConsoleUI
         private static void ArticleTests()
         {
             //Article Test
-            ArticleManager articleManager = new ArticleManager(new EfArticleDal());
+            ArticleManager articleManager = new ArticleManager(new EfArticleDal(),new CategoryManager(new EfCategoryDal()));
 
             var result = articleManager.GetArticleDetails();
 

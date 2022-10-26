@@ -23,6 +23,8 @@ namespace Business.Abstract
 
         IDataResult <List<Article>> GetMostPopular();
 
+        IResult Update(Article article);
+
         //RESTFUL --> HTTP -->
     }
 }

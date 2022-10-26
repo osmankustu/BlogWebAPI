@@ -12,5 +12,6 @@ namespace Business.Abstract
     {
         public IDataResult<List<Yonetici>> GetAll();
         public IDataResult<Yonetici> Get(int yoneticiId);
+        public IDataResult<Yonetici> Auth(string user,string pwd);
     }
 }

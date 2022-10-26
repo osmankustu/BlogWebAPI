@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -18,6 +19,11 @@ namespace Business.Concrete
         public YoneticiManager(IYoneticiDal yoneticiDal)
         {
             _yoneticiDal = yoneticiDal;
+        }
+
+        public IDataResult<Yonetici> Auth(string user ,string pwd)
+        {
+            return new SuccessDataResult<Yonetici>(_yoneticiDal.Get(y => y.YoneticiKullaniciAdi == user && y.YoneticiSifre == pwd),"Authorized");
         }
 
         public IDataResult<Yonetici>Get(int yoneticiId)

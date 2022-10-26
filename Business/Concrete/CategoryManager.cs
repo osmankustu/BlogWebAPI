@@ -1,7 +1,10 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entites.Concrete;
 using System;
 using System.Collections.Generic;
@@ -14,10 +17,18 @@ namespace Business.Concrete
     public class CategoryManager : ICategoryService
     {
         ICategoryDal _categoryDal;
+        
         public CategoryManager(ICategoryDal categoryDal)
         {
             _categoryDal = categoryDal;
         }
+        [ValidationAspect(typeof(CategoryValidator))]
+        public IResult add(Category category)
+        {
+            _categoryDal.Add(category);
+            return new Result(true, "Kategori Eklendi");
+        }
+
 
         public IDataResult<List<Category>> GetAll()
         {
@@ -28,5 +39,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Category>(_categoryDal.Get(c => c.CategoryId == CategoryId));
         }
+
+       
     }
 }
