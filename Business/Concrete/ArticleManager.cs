@@ -3,6 +3,8 @@ using Business.BusinesAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -39,6 +41,10 @@ namespace Business.Concrete
         [SecuredOperation("article.add,admin")]
         //Validations
         [ValidationAspect(typeof(ArticleValidator))]
+        //Yeni Ürün eklendiğinde Cache'yi Boşat -sil
+        [CacheRemoveAspect("IProductService.Get")]
+        //Performans Testi
+        [PerformanceAspect(5)]
         public IResult add(Article article)
         {
             //business Code
@@ -52,8 +58,8 @@ namespace Business.Concrete
             return new SuccesResult(Messages.ArticleAdd);
         }
 
-
-        
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<List<Article>> GetAll()
         {
             IResult result = BusinessRules.Run(MaintanceTime());
@@ -64,7 +70,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Article>>(_articleDal.GetAll());
             
         }
-
+        
         public IDataResult<List<Article>> GetAllByCategoryId(int CategoryId)
         {
             return new SuccessDataResult<List<Article>>(_articleDal.GetAll(p => p.CategoryId == CategoryId));
@@ -76,6 +82,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ArticleDetailDTO>>(_articleDal.GetArticleDetails(), Messages.ArticleDetails);
         }
 
+        [CacheAspect]
         public IDataResult<Article> GetById(int articleId)
         {
             return new SuccessDataResult<Article>(_articleDal.Get(a => a.ArticleId == articleId));
@@ -86,7 +93,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Article>>(_articleDal.GetAll(a => a.ArticleId == 2));
         }
 
+        //Authorizations
+        [SecuredOperation("article.update,admin")]
+        //validation rules
         [ValidationAspect(typeof(ArticleValidator))]
+        //Bir veri güncellendiğinde belleği sil
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Article article)
         {//business Code
          //Bir kategoride en fazla 10 makale olabilir
@@ -138,6 +150,10 @@ namespace Business.Concrete
             }
             return new SuccesResult();
         }
-       
+
+        public IResult AddITransactionalTest(Article article)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

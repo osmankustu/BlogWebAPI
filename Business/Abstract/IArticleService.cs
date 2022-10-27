@@ -24,6 +24,7 @@ namespace Business.Abstract
         IDataResult <List<Article>> GetMostPopular();
 
         IResult Update(Article article);
+        IResult AddITransactionalTest(Article article);
 
         //RESTFUL --> HTTP -->
     }
