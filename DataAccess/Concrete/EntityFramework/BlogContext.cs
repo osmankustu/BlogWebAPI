@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=95.70.220.175;Database=BlogDatabase;user id=SystemArch;pwd=Developer15; trusted_connection = false");
+            optionsBuilder.UseSqlServer(@"Server=:)));Database=BlogDatabase;user id=SystemArch;pwd=Developer15; trusted_connection = false");
         }
 
         public DbSet<Article> Article_Tbl  { get; set; }
